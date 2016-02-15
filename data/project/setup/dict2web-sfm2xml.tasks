@@ -1,0 +1,29 @@
+# kyj sfm-dict2xml            
+                              ;var pcode dict2web
+get variables                 ;projectvar
+start file                    ;inputfile "%projectpath%\%source%"
+prexml ccts                   ;cct "%prexmlccts%"
+#convert                       ;command2file "iconv -c -f LATIN1 -t UTF-8 '%outfile%'" "%projectpath%\xml\%iso%.sfm"
+output                        ;outputfile "%projectpath%\xml\%iso%.sfm"
+start file                    ;inputfile "blank.xml"
+convert to xml                ;xslt sfm2xml-dict3 "sourcetext='%projectpath%\xml\%iso%.sfm' tablemarker=tb"
+remove nodes                  ;xslt generic-remove-nodes "removenodelist='%fields_to_remove%'"
+lx grouping                   ;xslt generic-grouping-with-exclude "parentnode=data groupnode=lx"
+remove some empty             ;xslt generic-remove-empty-except "except_list='ms' removeempty_list='ra re rf rg rm rs va lg ie ex tr da ps oi gl'"
+sort dict                     ;xslt dict-sort-with-custom-collation-option "translateaccents=%translateaccents% customfind=%customfind% customreplace=%customreplace% collationname='%collationname%' decchar2remove='%decchar2remove%' secondarysort=%secondarysort%"
+rename staged file            ;outputfile "%projectpath%\xml\%iso%-sorted.xml"
+group examples                ;xslt generic-group-pair "firstnode=ex secondnode=tr"
+group ms                      ;xslt generic-grouping-start-with-list "groupnodelist='ms occ oid' parentnode='lxGroup'"
+group                         ;xslt generic-grouping-start-with-list "groupnodelist='lc ld li ls' parentnode='lxGroup'"
+group                         ;xslt generic-grouping-start-with-list "groupnodelist='lc ld li ls' parentnode='msGroup'"
+group                         ;xslt generic-grouping-with-exclude "parentnode=lxGroup groupnode=ps excludelist='lcGroup ldGroup liGroup lsGroup'"
+group                         ;xslt generic-grouping-with-exclude "parentnode=msGroup groupnode=ps excludelist='lcGroup ldGroup liGroup lsGroup'"
+group                         ;xslt generic-grouping-inside-list  "parentnodes='lcGroup ldGroup liGroup lsGroup' groupnode='ps'" 
+group                         ;xslt generic-new-group-select "node1=rf node2=ad node3= node4= node5= node6= node7= node8= node9="  
+group                         ;xslt generic-add-preceding-to-group "includenode=ad groupnode=rfGroup"  
+group                         ;xslt generic-group-serial-nodes "serialnodelist='ra re rg rs rt sc ii it iv'"
+group                         ;xslt mark-sense-in-fields "findsenseinelementlist='ra re rg rs rt sc c1'"
+conditional ccts              ;ifdefined "%postxmlccts%" dict2web-postxmlccts.tasks
+#post xml ccts                 ;command "if defined postxmlccts call :cct '%postxmlccts%'" 
+validate xml                  ;xslt validate-xml
+output renamed                ;outputfile "%projectpath%\xml\%iso%-a.xml"

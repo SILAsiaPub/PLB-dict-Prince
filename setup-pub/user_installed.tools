@@ -1,0 +1,14 @@
+# user_installed.tools
+# =============================================================================
+# Tools not found in the path
+# ------------------------------------------------------------------------------
+# http://www.princexml.com
+prince=C:\Program Files (x86)\Prince\engine\bin\Prince.exe
+
+# Consistent Changes for Windows
+# http://www.sil.org/computing/catalog/show_software.asp?id=4
+ccw32=C:\Program Files (x86)\SIL\cc\Ccw32.exe
+=============================================================================
+# Tools found in the path
+# ------------------------------------------------------------------------------
+

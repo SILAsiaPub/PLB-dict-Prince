@@ -1,0 +1,91 @@
+c Removed the " in the endword punctuation list as it broke words iwth " in it. Like tbw
+c may need adding for some languages. 2012-03-12
+c Ian McQuay
+begin               >                   store(endwordpunc) '.,?!;:'  
+                                        store(beginwordpunc) '{' u201C 
+                                        store(alpha) 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' "'"
+                                        store(number) '0123456789'
+                                        store(caret) '^'
+                                        store(backbold) '</charbold>' 
+                                        store(backitalic) '</charitalic>' 
+                                        store(backsmallcaps) '</charsmallcaps>' 
+                                        store(backnormal) '</normal>' endstore
+                                        clear(bold) clear(italic) clear(smallcaps)
+                                        use(main)
+
+group(main)
+'|n'                >                   '<br />' c used for line breaks
+'|h'                >                   '' c used for blank cells in tables
+'|r'                  >                   '<normal>' set(normal) use(normalinbold)
+'>'                 >                   dup clear(bold) clear(italic)
+' |b'                  >                  ' <charbold>' set(bold) use(phrase)
+' |i'                  >                  ' <charitalic>' set(italic)  use(phrase)
+' |s'                  >                  ' <charsmallcaps>' set(smallcaps)  use(phrase)
+'|s'                  >                  '<charsmallcaps>' set(smallcaps)  use(phrase)
+'|b'                  >                  '<charbold>' set(bold) use(phrase)
+'|-'                  >                  '<underline>' set(underline) use(phrase)
+'|i'                  >                  '<charitalic>' set(italic)  use(phrase)
+'|b|i'                >                   '<charbold><charitalic>'  set(bold) set(italic)  use(phrase)
+' |b|i'                >                   ' <charbold><charitalic>'  set(bold) set(italic)  use(phrase)
+'|i|b'                >                   '<charbold><charitalic>' set(bold) set(italic)   use(phrase)
+' |i |b'                >                   '<charbold><charitalic>' set(bold) set(italic)   use(phrase)
+' |i|b'                >                   ' <charbold><charitalic>' set(bold) set(italic)   use(phrase)
+'_' fol(alpha)                 >          '<charbold>' set(bold) use(phrase) 
+' +' fol(alpha)      >                     ' <charbold>' set(bold) use(word)
+prec(alpha) '+' fol(alpha)      >           '<charbold>' set(bold) use(word)
+prec(beginwordpunc) '+' fol(alpha)      >   '<charbold>' set(bold) use(word)
+' +(' fol(alpha)      >                     ' (' 
+'>+' fol(alpha)      >                     '><charbold>' set(bold) use(word)
+c '(+' fol(alpha)      >                     '(<charbold>' set(bold) use(word)
+' + '                >                   dup
+prec(number) '^'       >                 back(3) use(caller)
+
+group(word)
+'<'                   >                   if(bold) begin out(backbold) clear(bold) end dup use(main)
+' '                  >                    if(bold) begin out(backbold) clear(bold) end dup back(1) use(main)
+'|r'                  >                   if(italic) begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end  use(main)
+any(endwordpunc)                  >       if(bold) begin out(backbold) clear(bold) end dup use(main)
+'|n'                >                   '<br />' c used for line breaks
+'|h'                >                   '' c used for blank cells in tables
+
+group(phrase)
+'|n'                >                   '<br />' c used for line breaks
+'|h'                >                   '' c used for blank cells in tables
+'|r'                  >                   if(smallcaps) begin out(backsmallcaps) clear(smallcaps) end  if(italic)begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end  use(main)
+'|i'                  >                   ifn(italic) begin '<charitalic>'  set(italic) end
+'|s'                >                     '<charsmallcaps>' set(smallcaps)
+prec(alpha) '_'       >                   if(italic) begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end  use(main)
+prec(alpha) '|_'      >                   if(underline) begin out(underline) clear(underline) end use(main)
+'<'                   >                   if(italic) begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end  if(normal) begin out(backnormal) clear(normal) end dup clear(bold) clear(italic) clear(normal) use(main)
+'|b'                >                     if(bold) begin
+                                                            c do nothing bold already set
+                                          else
+                                                            ifn(italic) begin out(backitalic) '<charbold><charitalic>'  set(bold) set(italic) end
+                                          end
+                                          
+group(bothset)
+'|r'                  >                   if(italic) begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end  use(main)
+'<'                   >                   if(smallcaps) begin out(backsmallcaps) clear(smallcaps) end if(italic) begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end  if(normal) begin out(backnormal) clear(normal) end dup clear(bold) clear(italic) clear(normal) use(main)
+'|n'                >                   '<br />' c used for line breaks
+'|h'                >                   '' c used for blank cells in tables
+
+group(normalinbold)
+'|b'                >                   if(normal) begin out(backnormal) clear(normal) '<charbold>' set(bold) use(phrase)
+'|i'                >                   if(normal) begin out(backnormal) clear(normal) '<charitalic>' set(italic) use(phrase) c only for |r to |b or |i sequence in a field formatted old or italic.
+'<'                   >                 if(normal) begin out(backnormal) clear(normal) dup use(main)  
+'|n'                >                   '<br />' c used for line breaks
+'|h'                >                   '' c used for blank cells in tables
+
+group(caller)
+any(number) fol(caret)     >             '<sup>' dup '</sup>' use(main)
+any(number) any(number) fol(caret)     > '<sup>' dup '</sup>' use(main)
+
+c group(enditalic)
+c '|r'                  >                    if(italic) begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end use(main)
+c '|i'                  >                   ''
+c '|b'                >                     '<charbold>' set(bold)
+c '<'                   >                    if(italic) begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end dup use(main)
+c 
+c group(enditbold)
+c '|r'                  >                    if(italic) begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end use(main)
+c '<'                   >                    if(italic) begin out(backitalic) clear(italic) end if(bold) begin out(backbold) clear(bold) end  dup use(main)
