@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:f="myfunctions">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:f="myfunctions" exclude-result-prefixes="f ">
+      <!-- <xsl:namespace-alias result-prefix="#default" stylesheet-prefix="f" />       -->
       <xsl:output method="html" version="5.0" encoding="utf-8" omit-xml-declaration="no" indent="yes"/>
       <xsl:strip-space elements="*"/>
       <xsl:include href="project.xslt"/>
@@ -40,7 +41,10 @@ vaGroup	(var. 	)</xsl:param>
       <!-- <xsl:variable name="labels" select="tokenize($labels_list,' ')"/> -->
       <xsl:variable name="labels-data" select="tokenize($labels-data_list,'\r?\n')"/>
       <xsl:template match="/*">
-            <html>
+            <xsl:element name="html">
+                  <xsl:attribute name="lang">
+                        <xsl:text>en</xsl:text>
+                  </xsl:attribute>
                   <head>
                         <meta name="generator" content="ToolBox PLB dictionary transformation"/>
                         <title>
@@ -56,20 +60,16 @@ vaGroup	(var. 	)</xsl:param>
                               <xsl:apply-templates/>
                         </xsl:element>
                   </body>
-            </html>
+            </xsl:element>
       </xsl:template>
       <xsl:template match="*[local-name() = $divs]">
-            <!--s <xsl:if test="name() ne 'lxGroup'">
-                  <xsl:text>&#10;</xsl:text>
-            </xsl:if> -->
+            <!--s <xsl:if test="name() ne 'lxGroup'">                  <xsl:text>&#10;</xsl:text>            </xsl:if> -->
             <div class="{name(.)}">
                   <xsl:apply-templates/>
             </div>
       </xsl:template>
       <xsl:template match="*[local-name() = $spans]">
-            <!--<xsl:if test="name() ne 'lxGroup'">
-                  <xsl:text>&#10;</xsl:text>
-            </xsl:if> -->
+            <!--<xsl:if test="name() ne 'lxGroup'"><xsl:text>&#10;</xsl:text> </xsl:if> -->
             <span class="{name(.)}">
                   <xsl:apply-templates/>
                   <xsl:if test="not(matches(name(),'Group'))">
