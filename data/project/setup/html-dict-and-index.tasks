@@ -8,7 +8,7 @@ set startfile                           ;inputfile "%projectpath%\xml\%iso%-a.xm
 fix wedge quotes                        ;cct "bar2html.cct"
 #convert                                ;command2file "iconv -c -f LATIN1 -t UTF-8 '%outfile%'" "%projectpath%\xml\%iso%2.xml"
 
-temp                                    ;outputfile "%projectpath%\%iso%2.xml" 
+temp                                    ;outputfile "%projectpath%\xml\%iso%2.xml" 
 make main body                          ;xslt plb_dic_print-iso "" "%outfile%" "%projectpath%\html\dict.html"
 inputfile                               ;inputfile  "%projectpath%\xml\%iso%-sorted.xml"
 # get ie or gl                          ;xslt plb_dic_get_ie_or_gl
