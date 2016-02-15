@@ -1,0 +1,54 @@
+@page {
+    counter-increment: page;
+    margin: 2cm 2cm 2cm 2cm;
+    @top-left {
+        content: string(guideword, first);
+        direction: ltr;
+        font-family: "Charis SIL", sans-serif;   /* default Serif font */
+        font-weight: bold;
+        font-size: 12pt;
+        margin-top: 1em;
+    }
+    @top-center {
+        content: counter(page);
+        margin-top: 1em
+    }
+    @top-right {
+        content: string(guideword, last);
+        direction: ltr;
+        font-family: "Charis SIL", sans-serif; 
+        font-weight: bold;
+        font-size: 12pt;
+        margin-top: 1em;
+    }
+}
+@page :first {
+    @top-left { content: ''; }
+    @top-center { content: ''; }
+    @top-right { content: ''; }
+}
+
+body { 
+    font-family:'Charis Sil'; font-size:9pt;
+    column-count: 2;   -moz-column-count: 2;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    text-align: left;
+}
+.lx {string-set: guideword content();}
+.lx {font-weight:800 ;font-size:115%}    
+.multisense {display:block;   margin-left: 1.5em; }
+div.lxGroup {  text-indent: -1.5em;   margin-left: 1.5em; }
+div.msGroup {  text-indent: -0.5em; }
+div.lcGroup {  text-indent: -0.5em; }
+div.ldGroup {  text-indent: -0.5em; }
+div.occGroup {  text-indent: -0.5em; }
+div.oidGroup {  text-indent: -0.5em; }
+.oa, .oi {font-weight:800}
+
+.ld, .lc  {font-weight:800}
+span.oid  {font-weight:800}
+div.oidGroup, div.ldGroup {text-indent: -0.5em; }
+.ar, .ex, .ps, .sn {font-style:italic;}
+.ra ,.re , .rf, .rs , .ro {font-style:italic;font-weight:800}
+.label {font-style:italic;font-weight:normal} 

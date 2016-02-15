@@ -1,0 +1,23 @@
+.index {margin: 0 0 0 0}
+.lx {font-weight:bold; }
+@page {
+    margin: 2cm 2cm 2cm 2cm;
+    @top-left {
+        content: '';
+    }
+    @top-center {
+        content: counter(page);
+        margin-top: 1em
+    }
+    @top-right {
+        content: '';
+    }
+}
+
+body {
+    column-count: 3;   -moz-column-count: 3;
+    column-gap: 1.5em; -moz-column-gap: 1.5em;
+    column-fill: balance;
+    text-align: left;
+}
+sub {font-size: 80%}
