@@ -3,7 +3,7 @@
       <xsl:include href="project.xslt"/>
       <xsl:variable name="lxdata"/>
       <xsl:template match="/">
-            <html>
+            <html lang="en">
                   <head>
                         <meta name="generator" content="ToolBox PLB dictionary transformation"/>
                         <title>
