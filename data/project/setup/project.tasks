@@ -1,22 +1,18 @@
 # ==================================================================
 # dict2web project variables 
 # conforms to 201501 html creation templates
-variable                                ;var iso sse
-variable                                ;var langname Balangini
+variable                                ;var iso iso
+variable                                ;var langname "Language name"
 variable                                ;var type plb
-variable                                ;var source "sse-Dict-utf8.sfm"
+variable                                ;var source "%iso%-Dict-utf8.sfm"
 variable                                ;var natlang  ""
 variable                                ;var reglang  ""
 variable                                ;var reg2lang ""
 variable                                ;var reg3lang ""
 variable                                ;var labelname %langname%
-copyright                               ;var copyright "2014 SIL Philippines"
+copyright                               ;var copyright "2016 SIL Philippines"
 variable                                ;var splitseparator ;
-variable                                ;var intropage online-%iso%.html
-variable                                ;var title online-%iso%.html
-variable                                ;var voltitle "Balangini-English Dictionary (work in progress 1980-2016)"
-variable                                ;var htmlpath "D:\All-SIL-PLB\WebMaster\plb-www\prog\%iso%1\dict\"
-check dir                               ;checkdir "%htmlpath%\common"
+variable                                ;var voltitle "%langname%-English Dictionary (work in progress 1980-2016)"
 # collation settings for custom collation
 variable                                ;var collationname ""
 variable                                ;var translateaccents "no"
@@ -26,100 +22,31 @@ variable                                ;var customreplace ""
                                         ;var secondarysort "lx"
                                         ;var removechar ""
                                         ;var groupingfield "ie"
-# pre-xml-ccts
-#list of ccts for sfm pre checks         ;var prexmlccts "fix_wedge_quotes.cct,sse-fixes-orthography.cct"
 list of ccts for sfm pre checks         ;var prexmlccts "fix-wedge-quotes.cct,fix-sfm-elemt-names.cct"
 ccts to run after all xml changes       ;var postxmlccts "inline2xmlv2.cct"
 # key field groups for processing
-fields to remove                        ;var fields_to_remove_list "dq dt ud pn mo eg"
-vernacular fields for linking           ;var link_source_fields_list "lx va"
-fields to put links in                  ;var link_target_fields_list "re rf rg rt rm ro rs ra mb lc ld lk ls mr va"
+fields to remove                        ;var fields-to-remove_list "dq dt ud"
+
+# html tags lists ==============================================================================
+spans                                   ;var spans_list "d ex gl ms occ od oi oid tr exGroup glGroup psGroup"
+divs                                    ;var divs_list "lcGroup ldGroup lxGroup occGroup oidGroup"
+comma separated output list             ;var commas_list "ra re rf rg rm rs va"
+labels list                             ;var labels_list "da ds dt dts lc ld raGroup reGroup rfGroup rgGroup rmGroup rsGroup vaGroup"
+
                                         ;var separatorpunctuation ","
                                         ;var fields_to_split_list "gl"
-                                        ;var indexes_to_build_list "ver eng"
-source fields for English               ;var index_source_fields_eng "ie"
-source fields for Vernacular            ;var index_source_fields_ver "lx va"
+
                                         ;var spacebeforehom ""
-#index info combined                     ;var indexdata "ver=lx va:eng=ie"
-#source fields for National              ;var index_source_fields_nat "it"
-#source fields for Regional              ;var index_source_fields_reg ""
-#source fields for Regional2             ;var index_source_fields_reg2 ""
-#semicolon                               ;var semicolon ;
-# the following sometimes needs need editing
+
 set volsubtitle                         ;var subtitle ""
-region                                  ;var region "Cordilliaras"
+region                                  ;var region "ARM"
 country                                 ;var country "Philippines"
 Eng reversal/index field                ;var engindex  "ie"
 English definition field                ;var engdef "gl"
 
-                                        
-# ===========================================================================================
-# udict app variables
-reverseurl                              ;var revurl org.sil.dict.%iso%
-remove space                            ;var appname1 "%voltitle: =%"
-remove hyphen                           ;var appname %appname1:-=%
- accented char                          ;var accentedchar "áàâéèêíìîóòôùû"
- unaccented char                        ;var noaccentchar "aaaeeeiiiooouu"
-definitions list                        ;var definitions_list "gl ie"
+check dir                               ;checkdir "%projectpath%\pdf"
+check dir                               ;checkdir "%projectpath%\html"
 
-keystore to use                         ;var keystore dict.key
-key alias                               ;var keyalias dict
-icon source                             ;var appicon dictionary
-icon source dir                         ;var iconresourcepath resources\icons\%appicon%
-icon resource part name                 ;var iconrespartname %appicon%-icon
-
-build subfolder                         ;var buildsystem cordova
-# the following do not need changing
-define app name from voltitle           ;var app_name "%voltitle%"
-key store path                          ;var defaultkeystorepath "%cd%\Android-keystore"
-keystore                                ;var keystorefile %defaultkeystorepath%\%keystore%
-set build path                          ;var buildpath "%projectpath%\%buildsystem%\www"
-android build path                      ;var androidantbuildpath "%projectpath%\%buildsystem%\platforms\android"
-ant propertis file                      ;var antproperties "%androidantbuildpath%\ant.properties
-
-# =============================================================================
-# groupings for html generation
-                                        ;var prefile "/lexicon/lx"
-                                        ;var preurl "../lexicon/lx"
-#                                        ;var groupsdivs_list "psGroup glGroup snGroup vaGroup exGroup iiGroup itGroup ivGroup lsGroup liGroup lcGroup msGroup odeGroup oidGroup oseGroup raGroup rtGroup reGroup rfGroup rgGroup rsGroup scGroup ocGroup oaGroup"
-#                                        ;var sensehom_list "ra re rg rs rt"
-#                                        ;var sensehomgrouped_list "ra re rg rs rt"
-#                                        ;var omit_list "no ie"
-                                        ;var omitfields-html_list "no"
-                                        ;var omitfields-js_list "ie"
-                                        ;var translateabreviations "ps oc"
-                                        ;var abreviationsinlinelist "oc"
-#                                        ;var serialnodesnothom "ii iv it"
-# HTML lists
-group divs                              ;var groupdivs_list "psGroup glGroup snGroup vaGroup seGroup exGroup iiGroup itGroup ivGroup lsGroup liGroup lcGroup msGroup odeGroup oidGroup oseGroup raGroup rtGroup reGroup rfGroup rgGroup rsGroup scGroup ocGroup oaGroup"
-#                                        ;var inlinespans_list "charbold charitalic charbolditalic"
-inlinespans                             ;var inlinespans_list "charbold charitalic charbolditalic strong em oa oi rf ad"
-sense and hom                           ;var sensehom_list "ra re rg rs rt"
-grouped sense hom                       ;var sensehomgrouped_list "ra re rg rs rt mr va"
-omit from output                        ;var omit_list "no ie"
-css translate list                      ;var csstranslate_list "ps oc"
-serial nodes                            ;var serialnodesnothom_list "ii iv it"
-#pathe parts                             ;var prefile "/lx"
-#pre url                                 ;var preurl "../lexicon/lx"
-
-# ============================================================================
-# dfm specific variables
-number of languages                     ;var nolangs 2
-publisher                               ;var publisher "SIL Philippines"
-iso 2                                   ;var iso2 eng
-iso 3                                   ;var iso3 ""
-iso 4                                   ;var iso4 ""
-publication date                        ;var pubdate 2014
-
-# ============================================================================
-# fo variables
-get before after file                   ;var beforeafter-file "resources\dict-plb-before-after-text.txt"
-block list elements                     ;var foblock-list "ps ad pl i b ar co dd1 dd2 de di ds ec eg ex gl ld li ls lx mb mo mr ms oa oi op pn re rf rg rs rt sn tb tr va"
-inline list                             ;var foinline-list "lxGroup msGroup"
-unwanted fields                         ;var removefields-list "ie"
-
-common param                            ;var transfrom "\/,.:"
-to                                      ;var transto "___"
 
 
 

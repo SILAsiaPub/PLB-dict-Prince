@@ -644,6 +644,7 @@ if not defined %testvar:"=% (
 goto :eof
 
 rem built in commandline functions =============================================
+
 :command
 :: Description: A way of passing any commnand from a tasklist. It does not use infile and outfile.
 :: Usage: call :usercommand "copy /y 'c:\patha\file.txt' 'c:\pathb\file.txt'"

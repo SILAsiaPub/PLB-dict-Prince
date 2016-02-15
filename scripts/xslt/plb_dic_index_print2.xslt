@@ -9,11 +9,12 @@
                         <title>
                               <xsl:value-of select="$voltitle"/>
                         </title>
-                        <style type="text/css">
-                              <xsl:text disable-output-escaping="yes"><![CDATA[<!--  ]]></xsl:text>
+                        <link rel="stylesheet" href="../css/index.css" type="text/css"/>
+                        <!--<style type="text/css">
+                              <xsl:text disable-output-escaping="yes"></xsl:text>
                               <xsl:call-template name="css"/>
-                              <xsl:text disable-output-escaping="yes"><![CDATA[// --> ]]></xsl:text>
-                        </style>
+                              <xsl:text disable-output-escaping="yes"></xsl:text>
+                        </style> -->
                   </head>
                   <body>
                         <xsl:for-each select="//ie">
@@ -45,7 +46,7 @@
                   </span>
             </div>
       </xsl:template>
-      <xsl:template name="css">
+      <!--<xsl:template name="css">
 .index {margin: 0 0 0 0}
 .lx {font-weight:bold; }
 @page {
@@ -69,5 +70,5 @@ body {
     text-align: left;
 }
 sub {font-size: 80%}
-      </xsl:template>
+      </xsl:template> -->
 </xsl:stylesheet>

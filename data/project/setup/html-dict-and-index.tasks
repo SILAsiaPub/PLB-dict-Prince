@@ -1,16 +1,26 @@
 # project.tasks
 # Sherri's specifications for Dictionary
-var                           ;projectvar
-set project code              ;var pcode %iso%Dict 
-set startfile                 ;inputfile "%projectpath%\xml\%iso%-a.xml"
+var                                     ;projectvar
+set project code                        ;var pcode %iso%Dict 
+set startfile                           ;inputfile "%projectpath%\xml\%iso%-a.xml"
 # bar code handling
-#include sfm to                ;tasklist dict2web-sfm2xml.tasks
-fix wedge quotes              ;cct "bar2html.cct"
-#convert                       ;command2file "iconv -c -f LATIN1 -t UTF-8 '%outfile%'" "%projectpath%\xml\%iso%2.xml"
+#include sfm to                         ;tasklist dict2web-sfm2xml.tasks
+fix wedge quotes                        ;cct "bar2html.cct"
+#convert                                ;command2file "iconv -c -f LATIN1 -t UTF-8 '%outfile%'" "%projectpath%\xml\%iso%2.xml"
 
-temp                          ;outputfile "%projectpath%\%iso%2.xml" 
-make main body                ;xslt plb_dic_print-iso "" "%outfile%" "%projectpath%\dict.html"
-inputfile                     ;inputfile  "%projectpath%\xml\%iso%-sorted.xml"
-# get ie or gl                  ;xslt plb_dic_get_ie_or_gl
-make index                    ;xslt plb_dic_index_print2 "" "" "%projectpath%\index.html"
-#index html file output        ;outputfile 
+temp                                    ;outputfile "%projectpath%\%iso%2.xml" 
+make main body                          ;xslt plb_dic_print-iso "" "%outfile%" "%projectpath%\html\dict.html"
+inputfile                               ;inputfile  "%projectpath%\xml\%iso%-sorted.xml"
+# get ie or gl                          ;xslt plb_dic_get_ie_or_gl
+make index                              ;xslt plb_dic_index_print2
+index html file output                  ;outputfile "%projectpath%\html\index.html"
+
+                                        ;var curcommand "'%prince%' '%projectpath%\html\dict.html' '%outfile%' -o '%projectpath%\pdf\%iso%-dict-with-index.pdf'"
+#                                        ;command "echo Command to be attempted:"
+#                                        ;command "echo %curcommand%"
+#                                        ;before
+#                                        ;echoon
+                                        ;command "%curcommand%" "" "%projectpath%\pdf\%iso%-dict-with-index.pdf"
+#                                        ;echooff
+#                                        ;after
+open pdf                                ;start "" "%projectpath%\pdf\%iso%-dict-with-index.pdf"

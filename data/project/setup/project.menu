@@ -3,4 +3,4 @@ convert sfm to xml                                ;tasklist dict2web-sfm2xml.tas
 #change code page                                  ;tasklist dict2web-change-codepage.tasks
 # structure xml                                     ;tasklist project-add-xml-structure.tasks
 #add links to xml                                  ;tasklist dict2web-add-links.tasks
-Make html of dict and index Sherri Specs          ;tasklist html-dict-and-index.tasks
+Make html of dict and index then a PDF               ;tasklist html-dict-and-index.tasks

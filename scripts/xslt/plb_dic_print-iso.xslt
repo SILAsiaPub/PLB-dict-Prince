@@ -4,11 +4,11 @@
       <xsl:strip-space elements="*"/>
       <xsl:include href="project.xslt"/>
       <xsl:include href="inc-lookup.xslt"/>
-      <xsl:param name="spans_list" select="'d ex gl ms occ od oi oid tr exGroup glGroup psGroup'"/>
+      <!-- <xsl:param name="spans_list" select="'d ex gl ms occ od oi oid tr exGroup glGroup psGroup'"/> -->
       <!--  raGroup reGroup rfGroup rgGroup rsGroup vaGroup -->
-      <xsl:param name="divs_list" select="'lcGroup ldGroup lxGroup occGroup oidGroup'"/>
-      <xsl:param name="commas_list" select="' ra re rf rg rm rs va'"/>
-      <xsl:param name="labels_list" select="'da ds dt dts lc ld raGroup reGroup rfGroup rgGroup rmGroup rsGroup vaGroup'"/>
+      <!-- <xsl:param name="divs_list" select="'lcGroup ldGroup lxGroup occGroup oidGroup'"/> -->
+      <!-- <xsl:param name="commas_list" select="' ra re rf rg rm rs va'"/> -->
+      <!-- <xsl:param name="labels_list" select="'da ds dt dts lc ld raGroup reGroup rfGroup rgGroup rmGroup rsGroup vaGroup'"/> -->
       <xsl:param name="labels-data_list">
 da	(Ar.) 	
 ds	(Sp.) 	
@@ -34,10 +34,10 @@ roGroup	ov syn.
 rsGroup	syn. 	
 rt 	(See 	for table.) 
 vaGroup	(var. 	)</xsl:param>
-      <xsl:variable name="spans" select="tokenize($spans_list,' ')"/>
-      <xsl:variable name="divs" select="tokenize($divs_list,' ')"/>
-      <xsl:variable name="commas" select="tokenize($commas_list,' ')"/>
-      <xsl:variable name="labels" select="tokenize($labels_list,' ')"/>
+      <!-- <xsl:variable name="spans" select="tokenize($spans_list,' ')"/> -->
+      <!-- <xsl:variable name="divs" select="tokenize($divs_list,' ')"/> -->
+      <!-- <xsl:variable name="commas" select="tokenize($commas_list,' ')"/> -->
+      <!-- <xsl:variable name="labels" select="tokenize($labels_list,' ')"/> -->
       <xsl:variable name="labels-data" select="tokenize($labels-data_list,'\r?\n')"/>
       <xsl:template match="/*">
             <html>
@@ -46,7 +46,7 @@ vaGroup	(var. 	)</xsl:param>
                         <title>
                               <xsl:value-of select="$voltitle"/>
                         </title>
-                        <link rel="stylesheet" href="dict.css" type="text/css"/>
+                        <link rel="stylesheet" href="../css/dict.css" type="text/css"/>
                   </head>
                   <body>
                         <xsl:element name="div">
