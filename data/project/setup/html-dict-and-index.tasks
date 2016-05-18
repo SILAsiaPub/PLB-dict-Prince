@@ -19,8 +19,8 @@ index html file output                  ;outputfile "%projectpath%\html\index.ht
 #                                        ;command "echo Command to be attempted:"
 #                                        ;command "echo %curcommand%"
 #                                        ;before
-#                                        ;echoon
+#                                        ;echo on
                                         ;command "%curcommand%" "" "%projectpath%\pdf\%iso%-dict-with-index.pdf"
-#                                        ;echooff
+#                                        ;echo off
 #                                        ;after
 open pdf                                ;start "" "%projectpath%\pdf\%iso%-dict-with-index.pdf"
